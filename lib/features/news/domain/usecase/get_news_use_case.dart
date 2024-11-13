@@ -5,13 +5,13 @@ import 'package:news_app/core/usecases/usecase.dart';
 import 'package:news_app/features/news/data/models/response_model.dart';
 import 'package:news_app/features/news/domain/repo/news_repo.dart';
 
-class GetNewsUseCase implements UseCase<ResponseModel, FilterNewsParams> {
+class GetNewsUseCase implements UseCase<NewsResponseModel, FilterNewsParams> {
   final NewsRepo newsRepo;
 
   GetNewsUseCase({required this.newsRepo});
 
   @override
-  Future<Either<Failure, ResponseModel>> call(params) =>
+  Future<Either<Failure, NewsResponseModel>> call(params) =>
       newsRepo.getNews(params);
 }
 
