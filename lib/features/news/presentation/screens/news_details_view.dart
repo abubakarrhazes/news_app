@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:news_app/features/news/domain/entities/article_entities.dart';

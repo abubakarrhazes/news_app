@@ -24,7 +24,7 @@ class _NewsScreenState extends State<NewsScreen> {
     double scrollPercentage = 0.7;
     if (currentScroll > (maxScroll * scrollPercentage)) {
       if (context.read<NewsBloc>().state is NewsLoaded) {
-        context.read<NewsBloc>().add(const GetMoreNews());
+        //context.read<NewsBloc>().add(const GetMoreNews());
       }
     }
   }
@@ -60,9 +60,7 @@ class _NewsScreenState extends State<NewsScreen> {
                       image: kNoConnection,
                       message: "Network failure\nTry again!",
                       onClick: () {
-                        context
-                            .read<NewsBloc>()
-                            .add(const GetNews());
+                        context.read<NewsBloc>().add(const GetNews());
                       },
                     );
                   }
@@ -73,12 +71,10 @@ class _NewsScreenState extends State<NewsScreen> {
                         Image.asset('assets/images/internal-server-error.png'),
                       if (state.failure is CacheFailure)
                         Image.asset('assets/images/no-connection.png'),
-                      const Text("News not found!"),
+                      const Text("Internet Connection not found!"),
                       IconButton(
                           onPressed: () {
-                            context
-                                .read<NewsBloc>()
-                                .add(const GetNews());
+                            context.read<NewsBloc>().add(const GetNews());
                           },
                           icon: const Icon(Icons.refresh)),
                       SizedBox(
@@ -89,9 +85,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 }
                 return RefreshIndicator(
                   onRefresh: () async {
-                    context
-                        .read<NewsBloc>()
-                        .add(const GetNews());
+                    context.read<NewsBloc>().add(const GetNews());
                   },
                   child: GridView.builder(
                     itemCount: state.articles.length +
