@@ -4,6 +4,21 @@ import 'package:news_app/features/news/data/models/source_model.dart';
 import 'package:news_app/features/news/domain/entities/article_entities.dart';
 import 'package:news_app/features/news/domain/entities/source_entity.dart';
 
+class ArticlesModel extends ArticlesEntity {
+  const ArticlesModel(super.status, super.totalResults, super.articles);
+
+  factory ArticlesModel.fromJson(Map<String, dynamic> json) {
+    return ArticlesModel(
+      json["status"],
+      json["totalResults"],
+      List<ArticleModel>.from(
+          json["articles"]!.map((x) => ArticleModel.fromJson(x))),
+    );
+  }
+
+  
+}
+
 class ArticleModel extends ArticleEntity {
   ArticleModel({
     required source,
@@ -37,15 +52,4 @@ class ArticleModel extends ArticleEntity {
       content: json["content"],
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        "source": (source as SourceModel).toJson(),
-        "author": author,
-        "title": title,
-        "description": description,
-        "url": url,
-        "urlToImage": urlToImage,
-        "publishedAt": publishedAt?.toIso8601String(),
-        "content": content,
-      };
 }

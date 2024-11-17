@@ -2,17 +2,20 @@ import 'package:dartz/dartz.dart';
 import 'package:news_app/core/constants/app_strings.dart';
 import 'package:news_app/core/error/failures.dart';
 import 'package:news_app/core/usecases/usecase.dart';
-import 'package:news_app/features/news/data/models/response_model.dart';
+
+import 'package:news_app/features/news/domain/entities/article_entities.dart';
 import 'package:news_app/features/news/domain/repo/news_repo.dart';
 
-class GetNewsUseCase implements UseCase<NewsResponseModel, FilterNewsParams> {
+class GetAllNewsUseCase implements UseCase<ArticlesEntity, NoParams> {
   final NewsRepo newsRepo;
 
-  GetNewsUseCase({required this.newsRepo});
+  GetAllNewsUseCase({required this.newsRepo});
 
   @override
-  Future<Either<Failure, NewsResponseModel>> call(params) =>
-      newsRepo.getNews(params);
+  Future<Either<Failure, ArticlesEntity>> call(NoParams params) {
+    // TODO: implement call
+    return newsRepo.getAllNews();
+  }
 }
 
 class FilterNewsParams {
@@ -24,7 +27,7 @@ class FilterNewsParams {
 
   const FilterNewsParams({
     this.category = 'general',
-    this.apiKey = AppStrings.API_KEY,
+    this.apiKey = API_KEY,
     this.country = 'us',
     this.page = 1,
     this.pageSize = 10,

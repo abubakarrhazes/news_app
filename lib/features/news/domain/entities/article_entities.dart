@@ -4,8 +4,24 @@ import 'dart:convert';
 import 'package:dartz/dartz_streaming.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/features/news/data/models/article_model.dart';
+import 'package:news_app/features/news/domain/entities/article_entities.dart';
 
 import 'package:news_app/features/news/domain/entities/source_entity.dart';
+
+class ArticlesEntity extends Equatable {
+  final String status;
+  final int totalResults;
+  final List<ArticleEntity> articles;
+
+  const ArticlesEntity(
+    this.status,
+    this.totalResults,
+    this.articles,
+  );
+
+  @override
+  List<Object> get props => [status, totalResults, articles];
+}
 
 class ArticleEntity extends Equatable {
   ArticleEntity({
